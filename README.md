@@ -1,0 +1,2 @@
+# getSlackConvData
+slackのトーク履歴・メンバーリストなどを簡易的に取得するツール
