@@ -1,0 +1,8 @@
+/venv/
+/sample/
+*pycache*
+creds.txt
+/input/
+/output/
+/work/
+cache.csv
