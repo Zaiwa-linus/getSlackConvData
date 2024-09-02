@@ -107,7 +107,7 @@ class SlackManager:
         :param cursor: ページング用のカーソル
         :return: APIレスポンスデータ
         """
-        return self.retry_request(func=self.client.conversations_history,default_wait_time=50/60,channel=channel_id, cursor=cursor, limit=1000)
+        return self.retry_request(func=self.client.conversations_history,default_wait_time=60/50,channel=channel_id, cursor=cursor, limit=1000)
 
     def fetch_conversations_replies(self, channel_id, thread_ts):
         """
@@ -117,7 +117,7 @@ class SlackManager:
         :param thread_ts: スレッドタイムスタンプ
         :return: APIレスポンスデータ
         """
-        return self.retry_request(func=self.client.conversations_replies,default_wait_time=50/60, channel=channel_id, ts=thread_ts, limit=1000)
+        return self.retry_request(func=self.client.conversations_replies,default_wait_time=60/50, channel=channel_id, ts=thread_ts, limit=1000)
 
     def get_user_email(self, member_id):
         """
@@ -134,7 +134,7 @@ class SlackManager:
 
         # APIから取得
         self.logger.view_email_api_access()  # メールアドレス問い合わせのためのAPIアクセスを表示
-        response = self.retry_request(func=self.client.users_info,default_wait_time=100/60, user=member_id)
+        response = self.retry_request(func=self.client.users_info,default_wait_time=60/100, user=member_id)
         if response:
             user_info = response['user']
             email = user_info.get('profile', {}).get('email')
