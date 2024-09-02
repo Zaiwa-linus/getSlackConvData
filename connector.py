@@ -313,7 +313,7 @@ class SlackManager:
             'type': message.get('type'),
             'user': user,
             'team': message.get('team'),
-            'text': clean_string(message.get('text')),  # 'text'のみクリーンアップ
+            'text': self.clean_string(message.get('text')),  # 'text'のみクリーンアップ
             'ts': message.get('ts'),
             'thread_ts': thread_ts or message.get('thread_ts'),
             'react': reacts,
@@ -322,6 +322,8 @@ class SlackManager:
             'channel_id': channel_id,
             'export_date': datetime.now().strftime('%Y-%m-%d')
         })
+
+
 
 
     def fetch_channel_messages(self, channel_id: str):
