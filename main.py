@@ -28,7 +28,7 @@ def main():
     manager = connector.SlackManager(user_cache)
 
     # Loggerインスタンスを作成
-    lgr = logger.Logger()
+    lgr = manager.logger
 
     # 各チャンネルの処理
     for index, row in df.iterrows():
