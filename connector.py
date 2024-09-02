@@ -54,7 +54,7 @@ class SlackManager:
             self.waiting_timer.start()
 
             try:
-                self.client.timeout = self.timeout
+                self.client.timeout = self.timeout * attempt
                 time.sleep(default_wait_time+self.rate_limit_wait_time)
 
                 result = func(*args, **kwargs)
