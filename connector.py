@@ -284,9 +284,17 @@ class SlackManager:
         self.logger.view_log(f"Finished fetching messages for channel '{channel_name}'")
         return df.drop_duplicates()
 
+    def clean_string(value):
+        """
+        Excelで使用できない文字を除去する関数。
 
-
-
+        :param value: 文字列
+        :return: クリーンアップされた文字列
+        """
+        if isinstance(value, str):
+            # Excelで使用できない特殊文字を除去
+            return ''.join(c for c in value if c.isprintable())
+        return value
 
     def process_message(self, data, message, channel_id, thread_ts=None):
         """
@@ -305,7 +313,7 @@ class SlackManager:
             'type': message.get('type'),
             'user': user,
             'team': message.get('team'),
-            'text': message.get('text'),
+            'text': clean_string(message.get('text')),  # 'text'のみクリーンアップ
             'ts': message.get('ts'),
             'thread_ts': thread_ts or message.get('thread_ts'),
             'react': reacts,
@@ -314,8 +322,6 @@ class SlackManager:
             'channel_id': channel_id,
             'export_date': datetime.now().strftime('%Y-%m-%d')
         })
-
-
 
 
     def fetch_channel_messages(self, channel_id: str):
