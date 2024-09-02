@@ -284,7 +284,7 @@ class SlackManager:
         self.logger.view_log(f"Finished fetching messages for channel '{channel_name}'")
         return df.drop_duplicates()
 
-    def clean_string(value):
+    def clean_string(self, value):
         """
         Excelで使用できない文字を除去する関数。
 
